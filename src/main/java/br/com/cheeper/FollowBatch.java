@@ -1,5 +1,7 @@
 package br.com.cheeper;
 
+import br.com.cheeper.util.IntegerRandom;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
