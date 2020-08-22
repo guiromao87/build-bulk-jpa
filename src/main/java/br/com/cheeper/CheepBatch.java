@@ -3,10 +3,10 @@ package br.com.cheeper;
 import br.com.cheeper.util.IntegerRandom;
 import com.github.javafaker.Faker;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public class CheepBatch {
     public static void main(String[] args) {
@@ -15,17 +15,19 @@ public class CheepBatch {
 
         try (Connection con = DriverManager.getConnection(myConnectionString, "root", "cheeper")) {
             String sql = "insert into cheep (message, profile_id, creation)" +
-                    "values (?,?,now())";
+                    "values (?,?,?)";
 
             Faker faker = new Faker();
+            LocalDateTime dt = LocalDateTime.now();
+            System.out.println(dt);
             try (PreparedStatement ps = con.prepareStatement(sql)) {
-                for (int i = 1; i <= 100000; i++) {
-
-                    for(int j = 1; j <= IntegerRandom.getRandomIntegerBetweenRange(1,5); j++) {
-                        ps.setString(1, faker.lorem().sentence(10));
-                        ps.setInt(2, i);
+                for (int i = 1; i <= 20; i++) {
+//                    for(int j = 1; j <= IntegerRandom.getRandomIntegerBetweenRange(1,5); j++) {
+                        ps.setString(1, faker.lorem().sentence(5));
+                        ps.setInt(2, 1);
+                        ps.setTimestamp(3, Timestamp.valueOf(dt.plusSeconds(i)));
                         ps.addBatch();
-                    }
+//                    }
                 }
                 ps.executeBatch();
             }
@@ -35,5 +37,12 @@ public class CheepBatch {
 
         Long fim = System.currentTimeMillis();
         System.out.println(" ******* TEMPO: " + (fim - inicio) /1000);
+    }
+
+    private static java.util.Date dt() {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        localDateTime.plusSeconds(1);
+        java.util.Date date1 = java.util.Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        return date1;
     }
 }

@@ -16,16 +16,16 @@ public class FollowBatch {
             String sql = "insert into relationship (follower_id, followed_id) values (?,?)";
 
             try (PreparedStatement ps = con.prepareStatement(sql)) {
-                for (int i = 1; i <= 100000; i++) {
-                    for(int j = 1; j <= IntegerRandom.getRandomIntegerBetweenRange(1,5); j++) {
-                        int id = IntegerRandom.getRandomIntegerBetweenRange(1, 10000);
+                for (int i = 1; i <= 20; i++) {
+//                    for(int j = 1; j <= IntegerRandom.getRandomIntegerBetweenRange(1,5); j++) {
+                        int id = IntegerRandom.getRandomIntegerBetweenRange(1, 20);
 
                         if(id == i) continue;
 
-                        ps.setInt(1, i);
+                        ps.setInt(1, 1);
                         ps.setInt(2, id);
                         ps.addBatch();
-                    }
+//                    }
                 }
                 ps.executeBatch();
             }
