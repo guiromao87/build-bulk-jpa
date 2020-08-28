@@ -15,10 +15,11 @@ public class LadyGagaFollowedBatch {
         try (Connection con = DriverManager.getConnection(myConnectionString, "root", "cheeper")) {
             String sql = "insert into relationship (follower_id, followed_id) values (?,?)";
 
+            IntegerRandom integerRandom = new IntegerRandom(10000);
             try (PreparedStatement ps = con.prepareStatement(sql)) {
 
                 for (int i = 1; i <= 10; i++) {
-                    int id = IntegerRandom.getRandomIntegerBetweenRange(1, 10);
+                    int id = integerRandom.proximo();
 
                     ps.setInt(1, id);
                     // Id da Lady gaga:

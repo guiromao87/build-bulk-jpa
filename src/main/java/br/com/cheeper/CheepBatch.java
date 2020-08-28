@@ -21,8 +21,8 @@ public class CheepBatch {
             LocalDateTime dt = LocalDateTime.now();
             System.out.println(dt);
             try (PreparedStatement ps = con.prepareStatement(sql)) {
-                for (int i = 1; i <= 20; i++) {
-//                    for(int j = 1; j <= IntegerRandom.getRandomIntegerBetweenRange(1,5); j++) {
+                for (int i = 1; i <= 500; i++) {
+//                    for(int j = 1; j <= IntegerRandom.getRandomIntegerBetweenRange(1,3); j++) {
                         ps.setString(1, faker.lorem().sentence(5));
                         ps.setInt(2, 1);
                         ps.setTimestamp(3, Timestamp.valueOf(dt.plusSeconds(i)));

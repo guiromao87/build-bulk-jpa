@@ -20,8 +20,9 @@ public class UserBatch {
             String userName = "";
 
             try (PreparedStatement ps = con.prepareStatement(sql)) {
-                for (int i = 1; i <= 20; i++) {
+                for (int i = 1; i <= 1000; i++) {
                     userName = faker.name().username();
+//                    userName = "Jack";
 
                     ps.setString(1, userName.replace(".", " "));
                     ps.setString(2, userName.replace(".", "_").concat("@cheeper.com"));

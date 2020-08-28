@@ -1,7 +1,23 @@
 package br.com.cheeper.util;
 
+import java.util.*;
+
 public class IntegerRandom {
-    public static int getRandomIntegerBetweenRange(int min, int max){
-        return (int)(Math.random()*((max-min)+1))+min;
+
+    private int tamanho;
+    private LinkedList<Integer> sacola = new LinkedList<>();
+
+    public IntegerRandom(int tamanho) {
+        this.tamanho = tamanho;
+
+        for(int i=1; i <= this.tamanho; i++) {
+            this.sacola.add(i);
+        }
+
+        Collections.shuffle(sacola);
+    }
+
+    public int proximo(){
+        return this.sacola.poll();
     }
 }

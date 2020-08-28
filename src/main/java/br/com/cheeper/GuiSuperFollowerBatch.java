@@ -16,10 +16,11 @@ public class GuiSuperFollowerBatch {
         try (Connection con = DriverManager.getConnection(myConnectionString, "root", "cheeper")) {
             String sql = "insert into relationship (follower_id, followed_id) values (?,?)";
 
+            IntegerRandom integerRandom = new IntegerRandom(10000);
             try (PreparedStatement ps = con.prepareStatement(sql)) {
 
                 for (int i = 1; i <= 10000; i++) {
-                    int id = IntegerRandom.getRandomIntegerBetweenRange(2, 10000);
+                    int id = integerRandom.proximo();
 
                     ps.setInt(1, 1);
                     ps.setInt(2, id);
