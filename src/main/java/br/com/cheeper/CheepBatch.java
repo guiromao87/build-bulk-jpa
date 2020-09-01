@@ -21,10 +21,10 @@ public class CheepBatch {
             LocalDateTime dt = LocalDateTime.now();
             System.out.println(dt);
             try (PreparedStatement ps = con.prepareStatement(sql)) {
-                for (int i = 1; i <= 500; i++) {
-//                    for(int j = 1; j <= IntegerRandom.getRandomIntegerBetweenRange(1,3); j++) {
+                for (int i = 1; i <= 1000; i++) { // Colocar 1000 cheeps
+//                    for(int j = 2; j <= 1869; j++) { // colocar id 2 ao 1869 para ter 1000 cheeps cada: total 94 seg
                         ps.setString(1, faker.lorem().sentence(5));
-                        ps.setInt(2, 1);
+                        ps.setInt(2, 1870);
                         ps.setTimestamp(3, Timestamp.valueOf(dt.plusSeconds(i)));
                         ps.addBatch();
 //                    }

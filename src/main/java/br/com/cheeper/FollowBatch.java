@@ -15,13 +15,13 @@ public class FollowBatch {
         try (Connection con = DriverManager.getConnection(myConnectionString, "root", "cheeper")) {
             String sql = "insert into relationship (follower_id, followed_id) values (?,?)";
 
-            IntegerRandom integerRandom = new IntegerRandom(1001);
+            IntegerRandom integerRandom = new IntegerRandom(1870);
             try (PreparedStatement ps = con.prepareStatement(sql)) {
-                for (int i = 1; i <= 870; i++) {
+                for (int i = 2; i <= 1871; i++) { // Eu sigo do id 2 ao 1871
 //                    for(int j = 1; j <= IntegerRandom.getRandomIntegerBetweenRange(1,5); j++) {
                         int id = integerRandom.proximo();
 
-                        if(id == i) continue;
+                        if(id == 1) continue;
 
                         ps.setInt(1, 1);
                         ps.setInt(2, id);
